@@ -1,0 +1,17 @@
+.searchArea{
+  text-align: center;
+}
+
+.searchInput{
+  width: 15rem;
+  border-radius: 10px;
+  height: 2.3rem;
+}
+
+.searchButton {
+  margin: 10px;
+}
+
+.createButton{
+  margin: 10px;
+}

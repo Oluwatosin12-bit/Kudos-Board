@@ -1,0 +1,32 @@
+.boardDisplay{
+    margin: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.eachBoard{
+    margin: 1.5rem;
+    align-items: center;
+}
+
+.boardImage{
+    display:flex;
+    justify-self: center;
+}
+
+.boardTitle, .boardCategory, .boardDescription, .boardAuthor{
+    color: white;
+}
+
+.boardType{
+    color: white;
+}
+
+.boardDelete{
+    margin-right: 0.7rem;
+}
+
+.boardView{
+    margin-right: 0.7rem;
+}

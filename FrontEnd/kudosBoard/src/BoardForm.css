@@ -1,0 +1,57 @@
+.formBackground {
+    /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity] */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    backdrop-filter: blur(4px);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+
+.formContainer{
+    width: 50rem;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    overflow: auto;
+}
+
+.xButton{
+    width: 3rem;
+    float: right;
+    justify-content: flex-end;
+}
+
+.boardOptions{
+    display: block;
+    margin-top: 10px;
+}
+
+option{
+    display: block;
+}
+
+.finishButtons{
+    text-align: center;
+}
+
+.submitButton{
+    margin: 1rem;
+}
+
+.closeButton{
+    margin: 1rem;
+}

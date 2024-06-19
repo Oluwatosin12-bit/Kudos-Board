@@ -16,17 +16,45 @@ app.post('/boards', async (req, res) => {
     res.status(200).json(newBoard);
 })
 
+// app.get('/boards', async(req, res) => {
+//     const board = await prisma.board.findMany()
+//     res.status(200).json(board);
+// })
 app.get('/boards', async(req, res) => {
-    const board = await prisma.board.findMany()
-    res.status(200).json(board);
-})
+    const {category} = req.query;
+    try{
+        const board = await prisma.board.findMany({
+            where: {boardCategory: category},
+        });
+        res.status(200).json(board);
+    } catch (error) {
+        res.status(500).json({"Error:": error});
+    }
+});
 
 app.get('/boards/:id', async(req, res) => {
     const {id} = req.params
-    const board = await prisma.board.findUnique(
-        {where: {id: parseInt(id)}, }
-    )
-    res.status(200).json(board);
+    try{
+        const board = await prisma.board.findUnique(
+            {where: {id: parseInt(id)}, }
+        )
+        res.status(200).json(board);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+})
+
+app.delete('/boards/:id', async(req, res) => {
+    const {id} = req.params;
+
+    try{
+        const deletedBoard = await prisma.board.delete({
+            where: {id: parseInt(id)}
+        });
+        res.status(200).json(deletedBoard);
+    } catch (error) {
+        console.error("Error:", error);
+    }
 })
 
 

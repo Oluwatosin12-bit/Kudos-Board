@@ -22,7 +22,6 @@ function BoardForm({setIsBoardFormOpen, imgUrl, randomNumber, fetchBoards}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({...formData, [name]: value,})
-    console.log("testing:", formData.title)
   }
 
   const handleSubmit = async (e) =>{
@@ -34,7 +33,6 @@ function BoardForm({setIsBoardFormOpen, imgUrl, randomNumber, fetchBoards}) {
         body: JSON.stringify(formData),
       });
       if (!response.ok) {
-
         console.log('Something went wrong.');
       } else {
         console.log('Kudo submitted successfully!');
@@ -59,14 +57,12 @@ function BoardForm({setIsBoardFormOpen, imgUrl, randomNumber, fetchBoards}) {
             </div>
             <div className = "boardOptions">
               <label>Category:</label>
-              <select type="text" >
+              <select type="text" name ="boardCategory" value = {formData.boardCategory} onChange={handleChange}>
                 {BoardOptions.map(({id, label}) =>
                 <option
                 name = "boardCategory"
-                value = {formData.boardCategory}
-                onChange={handleChange}
+                value = {label}
                 key={id}
-                onClick={() => ('clicked')}
                 className="boardCategory"
                 required>
                 {label}

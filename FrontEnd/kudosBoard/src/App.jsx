@@ -8,7 +8,7 @@ function App() {
   const [boards, setBoards] = useState([]);
   const [randomNumber, setRandomNumber] = useState(0);
 
-  //handle board addition modal
+  //handles board addition modal
   const [isBoardForm, setIsBoardForm] = useState(false);
   const handleBoardForm = () => {
     setIsBoardForm(!isBoardForm);
@@ -39,6 +39,21 @@ function App() {
     })
   }
 
+  const handleDeleteBoard = async (boardId) => {
+    try{
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/boards/${boardId}`, {
+        method: 'DELETE',
+      });
+      if(response.ok === true){
+        setBoards(boards.filter(board => board.id !== boardId))
+      } else {
+        console.error('Error deleting board');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const board = boards.map(board => {
     return(
       <>
@@ -47,10 +62,13 @@ function App() {
         title = {board.title}
         boardCategory = {board.boardCategory}
         description = {board.description}
-        author = {board.author}/>
+        author = {board.author}
+        handleDeleteBoard={handleDeleteBoard}
+        board={board}/>
       </>
     )
   })
+
 
   return (
     <>

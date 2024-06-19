@@ -16,10 +16,6 @@ app.post('/boards', async (req, res) => {
     res.status(200).json(newBoard);
 })
 
-// app.get('/boards', async(req, res) => {
-//     const board = await prisma.board.findMany()
-//     res.status(200).json(board);
-// })
 app.get('/boards', async(req, res) => {
     const {category} = req.query;
     try{

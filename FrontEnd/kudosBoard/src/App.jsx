@@ -6,6 +6,7 @@ import BoardForm from "./BoardForm"
 
 function App() {
   const [boards, setBoards] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [randomNumber, setRandomNumber] = useState(0);
 
   //handles board addition modal
@@ -19,24 +20,24 @@ function App() {
   };
 
   useEffect(() => {
-    fetchBoards();
-  }, [])
+      fetchBoards(selectedCategory);
+  }, [selectedCategory])
 
-  const fetchBoards = () => {
-    fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/boards`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
+  const fetchBoards = async(category) => {
+    try{
+      const url = category
+      ? `${import.meta.env.VITE_BACKEND_ADDRESS}/boards/?category=${category}`
+      : `${import.meta.env.VITE_BACKEND_ADDRESS}/boards`;
+      const response = await fetch(url);
+      const data = await response.json();
       setBoards(data);
-    })
-    .catch(error => {
-      console.error("Error:", error);
-    })
+    } catch (error) {
+      console.error('Error:', error);
+    }
+}
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
   }
 
   const handleDeleteBoard = async (boardId) => {
@@ -73,7 +74,7 @@ function App() {
   return (
     <>
       <SearchBoards handleBoardForm = {handleBoardForm}/>
-      <BoardCategories />
+      <BoardCategories handleCategoryClick={handleCategoryClick}/>
       <div className="boardDisplay">
         {board}
       </div>

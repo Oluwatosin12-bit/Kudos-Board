@@ -48,9 +48,9 @@
 
 import './BoardCategories.css'
 
-function BoardCategories(setView) {
+function BoardCategories({handleCategoryClick}) {
   const BoardOptions = [
-    {id: 'all', label: 'All'},
+    {id: 'all', label: ''},
     {id: 'recent', label: 'Recent'},
     {id: 'celebration', label: 'Celebration'},
     {id: 'thankYou', label: 'Thank You'},
@@ -61,7 +61,10 @@ function BoardCategories(setView) {
     <>
       <div className="boardCategories">
         {BoardOptions.map(({id, label}) =>
-              <button key={id} className="boardCategoryButton" onClick={() => setView(id)}> {label} </button>
+              <button
+              onClick={() =>handleCategoryClick(label)}
+              key={id}
+              className="boardCategoryButton" > {id} </button>
         )}
       </div>
     </>

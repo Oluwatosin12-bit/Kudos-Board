@@ -1,7 +1,7 @@
 import "./BoardForm.css";
 import { useState } from "react";
 
-function BoardForm({setIsBoardFormOpen, imgUrl, randomNumber, fetchBoards}) {
+function BoardForm({setIsBoardFormOpen, randomNumber, fetchBoards}) {
   const BoardOptions = [
     {id: 'all', label: 'All'},
     {id: 'recent', label: 'Recent'},

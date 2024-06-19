@@ -7,6 +7,7 @@ import BoardForm from "./BoardForm"
 function App() {
   const [boards, setBoards] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchWord, setSearchWord] = useState('');
   const [randomNumber, setRandomNumber] = useState(0);
 
   //handles board addition modal
@@ -20,15 +21,19 @@ function App() {
   };
 
   useEffect(() => {
-      fetchBoards(selectedCategory);
-  }, [selectedCategory])
+      fetchBoards(selectedCategory, searchWord);
+  }, [selectedCategory, searchWord])
 
-  const fetchBoards = async(category) => {
+  const fetchBoards = async(category, search) => {
     try{
-      const url = category
-      ? `${import.meta.env.VITE_BACKEND_ADDRESS}/boards/?category=${category}`
-      : `${import.meta.env.VITE_BACKEND_ADDRESS}/boards`;
-      const response = await fetch(url);
+      // const url = category
+      // ? `${import.meta.env.VITE_BACKEND_ADDRESS}/boards/?category=${category}`
+      // : `${import.meta.env.VITE_BACKEND_ADDRESS}/boards`;
+      const url = new URL(`${import.meta.env.VITE_BACKEND_ADDRESS}/boards`)
+      if (category) url.searchParams.append('category', category);
+      if (search) url.searchParams.append('search', search);
+
+      const response = await fetch(url.toString());
       const data = await response.json();
       setBoards(data);
     } catch (error) {
@@ -55,6 +60,10 @@ function App() {
     }
   };
 
+  const handleSearchChange = (e) =>{
+    setSearchWord(e.target.value);
+  }
+
   const board = boards.map(board => {
     return(
       <>
@@ -73,7 +82,7 @@ function App() {
 
   return (
     <>
-      <SearchBoards handleBoardForm = {handleBoardForm}/>
+      <SearchBoards handleBoardForm = {handleBoardForm} handleSearchChange={handleSearchChange} searchWords={searchWord}/>
       <BoardCategories handleCategoryClick={handleCategoryClick}/>
       <div className="boardDisplay">
         {board}

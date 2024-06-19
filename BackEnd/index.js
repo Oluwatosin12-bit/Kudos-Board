@@ -17,10 +17,17 @@ app.post('/boards', async (req, res) => {
 })
 
 app.get('/boards', async(req, res) => {
-    const {category} = req.query;
+    const {category, search} = req.query;
     try{
+        const where = {};
+        if(category !== null) {
+            where.boardCategory = category;
+        }
+        if(search !== null) {
+            where.title = {contains: search, mode: 'insensitive'};
+        };
         const board = await prisma.board.findMany({
-            where: {boardCategory: category},
+            where: where,
         });
         res.status(200).json(board);
     } catch (error) {

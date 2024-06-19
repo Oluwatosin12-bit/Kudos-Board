@@ -9,13 +9,13 @@ function App() {
   const [randomNumber, setRandomNumber] = useState(0);
 
   //handle board addition modal
-  const [openBoardForm, setopenBoardForm] = useState(false);
+  const [isBoardForm, setIsBoardForm] = useState(false);
   const handleBoardForm = () => {
-    setopenBoardForm(!openBoardForm);
+    setIsBoardForm(!isBoardForm);
     setRandomNumber(Math.floor(Math.random() * 100));
   }
   const closeBoardForm = () => {
-    setopenBoardForm(false);
+    setIsBoardForm(false);
   };
 
   useEffect(() => {
@@ -60,8 +60,8 @@ function App() {
         {board}
       </div>
 
-      {openBoardForm == true && (
-        <BoardForm setopenBoardFormOpen = {closeBoardForm} randomNumber={randomNumber} fetchBoards={fetchBoards}/>
+      {isBoardForm == true && (
+        <BoardForm setIsBoardFormOpen = {closeBoardForm} randomNumber={randomNumber} fetchBoards={fetchBoards}/>
       )}
     </>
   )

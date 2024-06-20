@@ -16,6 +16,22 @@ app.post('/boards', async (req, res) => {
     res.status(200).json(newBoard);
 })
 
+app.post('/boards/:id/cards', async (req, res) => {
+    const {id} = req.params;
+    const {cardTitle, cardDescription, cardImgUrl, cardAuthor} = req.body;
+    try{
+        const createdCards = await prisma.cards.create({
+            data: {
+                cardTitle, cardDescription, cardImgUrl, cardAuthor,
+                board: {connect: {id: parseInt(id)}},
+            },
+        });
+        res.status(200).json(createdCards);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+})
+
 app.get('/boards', async(req, res) => {
     const {category, search} = req.query;
     try{
@@ -47,14 +63,37 @@ app.get('/boards/:id', async(req, res) => {
     }
 })
 
+app.get('/boards/:id/cards', async (req, res) =>{
+    const {id} = req.params;
+    try{
+        const cards = await prisma.cards.findMany({
+            where: {boardId: parseInt(id)},
+        });
+        res.status(200).json(cards);
+    } catch(error) {
+        console.error("Error:", error);
+    }
+})
+
 app.delete('/boards/:id', async(req, res) => {
     const {id} = req.params;
-
     try{
         const deletedBoard = await prisma.board.delete({
             where: {id: parseInt(id)}
         });
         res.status(200).json(deletedBoard);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+})
+
+app.delete('/cards/:id', async(req, res) => {
+    const {id} = req.params;
+    try{
+        const deletedCard = await prisma.cards.delete({
+            where: {id: parseInt(id)}
+        });
+        res.status(200).json(deletedCard);
     } catch (error) {
         console.error("Error:", error);
     }

@@ -53,11 +53,11 @@ function BoardForm({setIsBoardFormOpen, randomNumber, fetchBoards}) {
         <form>
             <div>
               <label>Title:</label>
-              <input name ="title" className = "" type="text" value = {formData.title} onChange={handleChange} required/>
+              <input name ="title" className = "" type="text" value={formData.title} onChange={handleChange} required/>
             </div>
             <div className = "boardOptions">
               <label>Category:</label>
-              <select type="text" name ="boardCategory" value = {formData.boardCategory} onChange={handleChange}>
+              <select type="text" name ="boardCategory" value={formData.boardCategory} onChange={handleChange}>
                 {BoardOptions.map(({id, label}) =>
                 <option
                 name = "boardCategory"
@@ -72,11 +72,11 @@ function BoardForm({setIsBoardFormOpen, randomNumber, fetchBoards}) {
             </div>
             <div>
               <label>Description:</label>
-              <textarea name="description" type="text" value = {formData.description} onChange={handleChange} required/>
+              <textarea name="description" type="text" value={formData.description} onChange={handleChange} required/>
             </div>
             <div>
               <label>Author:</label>
-              <input name="author" type="text" value = {formData.author} onChange={handleChange}/>
+              <input name="author" type="text" value={formData.author} onChange={handleChange}/>
             </div>
         </form>
 

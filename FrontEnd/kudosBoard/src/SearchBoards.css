@@ -8,10 +8,7 @@
   height: 2.3rem;
 }
 
-.searchButton {
-  margin: 10px;
-}
-
 .createButton{
   margin: 10px;
+  background: linear-gradient(45deg, blue 0%, purple 0%, rgb(230, 70, 182) 0%, rgb(255, 102, 102) 100%)
 }

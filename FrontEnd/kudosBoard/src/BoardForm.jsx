@@ -26,22 +26,27 @@ function BoardForm({setIsBoardFormOpen, randomNumber, fetchBoards}) {
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    try{
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/boards`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        console.log('Something went wrong.');
-      } else {
-        console.log('Kudo submitted successfully!');
-        fetchBoards()
+    if  (formData.title === '' || formData.description === "") {
+      alert('Please fill out required fields.');
+    } else {
+      try{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/boards`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify(formData),
+        });
+        if (!response.ok) {
+          console.log('Something went wrong.');
+        } else {
+          console.log('Kudo submitted successfully!');
+          fetchBoards()
+        }
+      } catch(error) {
+        console.error('Error:', error)
       }
-    } catch(error) {
-      console.error('Error:', error)
+      setIsBoardFormOpen(false)
     }
-    setIsBoardFormOpen(false)
+
   }
 
   return (
@@ -51,38 +56,37 @@ function BoardForm({setIsBoardFormOpen, randomNumber, fetchBoards}) {
           <button className= "xButton" onClick={() => {setIsBoardFormOpen(false)}}> X </button>
         </div>
         <form>
-            <div>
-              <label>Title:</label>
-              <input name ="title" className = "" type="text" value={formData.title} onChange={handleChange} required/>
+            <div className="boardTitleSection">
+              <label className="boardTitleLabel">Title: <span className="compulsoryField">*</span></label>
+              <input name ="title" className = "" type="text" value={formData.title} onChange={handleChange}/>
             </div>
             <div className = "boardOptions">
-              <label>Category:</label>
+              <label className="boardCategoryLabel">Category:</label>
               <select type="text" name ="boardCategory" value={formData.boardCategory} onChange={handleChange}>
                 {BoardOptions.map(({id, label}) =>
                 <option
                 name = "boardCategory"
                 value = {label}
                 key={id}
-                className="boardCategory"
-                required>
+                className="boardCategory">
                 {label}
                  </option>
                 )}
               </select>
             </div>
-            <div>
-              <label>Description:</label>
-              <textarea name="description" type="text" value={formData.description} onChange={handleChange} required/>
+            <div className="boardDescriptionSection">
+              <label className="boardDescriptionLabel">Description: <span className="compulsoryField">*</span></label>
+              <textarea name="description" type="text" value={formData.description} onChange={handleChange}/>
             </div>
-            <div>
-              <label>Author:</label>
+            <div className="boardAuthorSection">
+              <label className="boardAuthorLabel">Author:</label>
               <input name="author" type="text" value={formData.author} onChange={handleChange}/>
             </div>
         </form>
 
         <div className = "finishButtons">
           <button className = "submitButton" onClick={handleSubmit}> Submit </button>
-          <button className = "closeButton" onClick={() => {setIsBoardFormOpen(false)}}> Cancel </button>
+          <button className = "closeButton" onClick={() => {setIsBoardFormOpen(false)}}> Close </button>
         </div>
       </div>
     </div>

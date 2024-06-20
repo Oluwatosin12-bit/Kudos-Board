@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import CardsDisplay from './CardsDisplay';
 import CardForm from './CardForm';
@@ -6,6 +6,7 @@ import './CardsPage.css'
 
 
 function CardsPage() {
+  let navigate = useNavigate();
   const { id } = useParams();
   const [cards, setCards] = useState([]);
   const [isCardForm, setIsCardForm] = useState(false);
@@ -59,13 +60,20 @@ function CardsPage() {
 
   return (
     <>
-      <button> ≪ </button>
-      <h1 className="cardsTag">Hi</h1>
-      <button onClick={handleCardForm}>Create Card</button>
-      {card}
-      {isCardForm == true && (
-        <CardForm setIsCardFormOpen={closeCardForm} id={id} fetchCards={fetchCards}/>
-      )}
+      <button onClick={() => navigate(-1)}> ⬅ </button>
+      <div className="cardsContainer">
+          <div className="createCardButton">
+            <button onClick={handleCardForm}>Create Card</button>
+          </div>
+          <div className="cardsDisplay">
+            {card}
+          </div>
+
+          {isCardForm == true && (
+            <CardForm setIsCardFormOpen={closeCardForm} id={id} fetchCards={fetchCards}/>
+          )}
+      </div>
+
     </>
   );
 }

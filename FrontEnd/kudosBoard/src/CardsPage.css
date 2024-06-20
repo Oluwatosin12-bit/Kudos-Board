@@ -1,3 +1,19 @@
 .cardsTag{
   color: white;
 }
+
+.cardsContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.createCardButton{
+  align-self: center;
+}
+
+.cardsDisplay{
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

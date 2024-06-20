@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './CardsDisplay.css';
 
 function CardsDisplay({cardTitle, cardImgUrl, cardDescription, handleCardDelete, card}) {
   const [counter, setCounter] = useState(0);
@@ -7,12 +8,14 @@ function CardsDisplay({cardTitle, cardImgUrl, cardDescription, handleCardDelete,
   }
   return (
     <>
-        <div className="">
-          <h3 className = "">{cardTitle}</h3>
+        <div className="eachCard">
+          <h3 className = "cardTitle">{cardTitle}</h3>
           <img className= "" src = {cardImgUrl} />
           <p>{cardDescription}</p>
-          <button onClick={increaseUpvote}>Upvote: {counter} </button>
-          <button onClick={() => {handleCardDelete(card.id)}}>Delete</button>
+          <div>
+            <button className="upVoteButton" onClick={increaseUpvote}>Upvote: {counter} </button>
+            <button className="cardDeleteButton" onClick={() => {handleCardDelete(card.id)}}>Delete</button>
+          </div>
         </div>
     </>
   );

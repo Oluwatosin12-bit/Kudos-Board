@@ -1,0 +1,19 @@
+.eachCard{
+    display: grid;
+    margin: 1.5rem;
+    place-items: center;
+}
+
+.cardTitle{
+    color: white;
+}
+
+.upVoteButton{
+    margin-right: 10px;
+}
+
+.cardDeleteButton:hover{
+    background-color: #ff0127;
+    color: white;
+    border-color: white;
+}

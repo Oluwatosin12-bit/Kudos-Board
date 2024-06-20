@@ -1,4 +1,4 @@
-.formBackground {
+.cardFormBackground {
     /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -17,7 +17,7 @@
     position: fixed;
 }
 
-.formContainer{
+.cardFormContainer{
     width: 25rem;
     height: 25rem;
     border-radius: 12px;
@@ -28,6 +28,10 @@
     padding: 25px;
     overflow: auto;
 }
+form{
+    display: flex;
+    flex-direction: column;
+}
 
 .xButton{
     width: 3rem;
@@ -35,18 +39,22 @@
     justify-content: flex-end;
 }
 
-.boardTitleLabel,
-.boardCategoryLabel,
-.boardDescriptionLabel,
-.boardAuthorLabel{
+.cardTitleLabel,
+.cardImageLabel,
+.cardDescriptionLabel,
+.cardAuthorLabel{
     display: block;
 }
 
-.boardTitleSection,
-.boardOptions,
-.boardDescriptionSection,
-.boardAuthorSection{
-    margin: 15px;
+.cardTitleSection,
+.cardDescriptionSection,
+.cardImageSection,
+.cardAuthorSection{
+    margin: 10px;
+}
+
+.cardImageSearch{
+    align-self: center;
 }
 
 .boardOptions{
@@ -62,14 +70,21 @@ option{
     text-align: center;
 }
 
-.submitButton{
+.submitButton, .closeButton{
     margin: 1rem;
 }
 
-.closeButton{
-    margin: 1rem;
+.closeButton:hover, .submitButton.hover{
+    cursor: pointer;
 }
 
-.compulsoryField{
-    color: red;
+.submitButton:hover{
+    background-color: aquamarine;
+    border-color: white;
+}
+
+.closeButton:hover, .xButton:hover{
+    background-color: #ff0127;
+    color: white;
+    border-color: white;
 }

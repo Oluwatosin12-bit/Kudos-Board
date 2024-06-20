@@ -6,17 +6,17 @@
 }
 
 .eachBoard{
+    display: grid;
     margin: 1.5rem;
-    align-items: center;
-}
-
-.boardImage{
-    display:flex;
-    justify-self: center;
+    place-items: center;
 }
 
 .boardTitle, .boardCategory, .boardDescription, .boardAuthor{
     color: white;
+}
+
+.boardTitle {
+    text-align: center;
 }
 
 .boardType{
@@ -25,6 +25,11 @@
 
 .boardDelete{
     margin-right: 0.7rem;
+}
+.boardDelete:hover{
+    background-color: #ff0127;
+    color: white;
+    border-color: white;
 }
 
 .boardView{

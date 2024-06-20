@@ -7,3 +7,7 @@
   margin: 1rem;
   color: black;
 }
+
+.boardCategoryButton:focus {
+  background: linear-gradient(45deg, #9933ff, #3191ff);
+}

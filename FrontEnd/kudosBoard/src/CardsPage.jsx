@@ -1,5 +1,5 @@
 import { useParams, useNavigate} from 'react-router-dom';
-import { useState, useEffect } from 'React';
+import { useState, useEffect } from 'react';
 import CardsDisplay from './CardsDisplay';
 import CardForm from './CardForm';
 import './CardsPage.css'

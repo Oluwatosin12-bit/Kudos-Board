@@ -1,5 +1,4 @@
 import './CardsDisplay.css';
-import {useState} from 'React';
 import CommentsForm from './CommentsForm';
 import CommentsView from './CommentsView';
 

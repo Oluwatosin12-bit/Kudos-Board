@@ -59,8 +59,11 @@ app.get('/boards', async(req, res) => {
         if(search !== null) {
             where.title = {contains: search, mode: 'insensitive'};
         };
+        // const  orderBy = recent === true ? {id: 'desc'} : null
+
         const board = await prisma.board.findMany({
             where: where,
+            // orderBy: orderBy,
         });
         res.status(200).json(board);
     } catch (error) {

@@ -20,6 +20,7 @@ model Board {
   boardCategory String
   description   String
   author        String
+  
   cards         Cards[]
 }
 

@@ -19,19 +19,15 @@ function CommentsForm({setIsCommentFormOpen, id}) {
       alert('Please fill out required fields.');
     } else {
       try{
-        console.log(id)
         const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/cards/${id}/comments`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify((commentData)),
         });
-        console.log("submitted")
         const newComment = await response.json();
         console.log(newComment);
         if (!response.ok) {
           console.log('Something went wrong.');
-        } else {
-          console.log('submitted successfully!');
         }
       } catch(error) {
         console.error('Error:', error)

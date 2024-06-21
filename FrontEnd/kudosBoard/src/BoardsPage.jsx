@@ -9,6 +9,7 @@ function BoardsPage() {
   const [boards, setBoards] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchWord, setSearchWord] = useState('');
+  const [recentBoards, isSetRecentBoards] = useState(false)
   const [randomNumber, setRandomNumber] = useState(0);
   const navigate = useNavigate();
 
@@ -27,25 +28,40 @@ function BoardsPage() {
   };
 
   useEffect(() => {
-      fetchBoards(selectedCategory, searchWord);
-  }, [selectedCategory, searchWord])
+      fetchBoards(selectedCategory, searchWord, recentBoards);
+  }, [selectedCategory, searchWord, recentBoards])
 
-  const fetchBoards = async(category, search) => {
+  const fetchBoards = async(category, search, recentBoards) => {
     try{
       const url = new URL(`${import.meta.env.VITE_BACKEND_ADDRESS}/boards`)
-      if (category) url.searchParams.append('category', category);
-      if (search) url.searchParams.append('search', search);
-
+      if (category) {
+        isSetRecentBoards(false)
+        url.searchParams.append('category', category)
+      };
+      if (search){
+        isSetRecentBoards(false)
+        url.searchParams.append('search', search)
+      };
       const response = await fetch(url.toString());
       const data = await response.json();
-      setBoards(data);
+      if (recentBoards === true) {
+        data.sort((a, b) => (b.id - a.id))
+        setBoards(data);
+      } else{
+        setBoards(data);
+      }
+
     } catch (error) {
       console.error('Error:', error);
     }
 }
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    if (category === "Recent"){
+      isSetRecentBoards(!recentBoards)
+    } else{
+      setSelectedCategory(category);
+    }
   }
 
   const handleDeleteBoard = async (boardId) => {

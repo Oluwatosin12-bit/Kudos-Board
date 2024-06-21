@@ -11,6 +11,10 @@
 .upVoteButton{
     margin-right: 10px;
 }
+.upVoteButton:hover{
+    background-color: orange;
+    color: white;
+}
 
 .cardDeleteButton:hover{
     background-color: #ff0127;
@@ -20,6 +24,13 @@
 .addCommentButton{
     margin-top: 5px;
 }
+.addCommentButton:hover{
+    background-color: aqua;
+}
+
 .commentViewButton{
     margin-left: 4px;
+}
+.commentViewButton:hover{
+    background-color: yellow;
 }

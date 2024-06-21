@@ -91,7 +91,7 @@ function CardsPage() {
       <button onClick={() => navigate(-1)}> ⬅ </button>
       <div className="cardsContainer">
           <div className="createCardButton">
-            <button onClick={handleCardForm}>Create Card</button>
+            <button className="createButton" onClick={handleCardForm}>Create Card</button>
           </div>
           <div className="cardsDisplay">
             {cardElements}

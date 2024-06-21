@@ -50,7 +50,6 @@ function CardForm({fetchCards, setIsCardFormOpen, id}) {
     event.preventDefault();
     if (searchQuery === '') return
     try{
-      // ${import.meta.env.VITE_GIPHY_API_KEY}
       const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${import.meta.env.VITE_GIPHY_API_KEY}&q=${searchQuery}&limit=5`);
       const data = await response.json();
       setGifList(data.data)

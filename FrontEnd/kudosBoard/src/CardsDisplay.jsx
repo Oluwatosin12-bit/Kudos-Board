@@ -1,10 +1,8 @@
 import './CardsDisplay.css';
-import CommentsForm from './CommentsForm';
-import CommentsView from './CommentsView';
 
 function CardsDisplay({cardTitle,
   cardImgUrl, cardDescription, handleCardDelete, card, handleOpenCommentForm,
-  handleOpenCommentSection,isCommentForm, closeCommentForm, isCommentSection, closeCommentSection, cards}) {
+  handleOpenCommentSection}) {
 
   const increaseUpvote = async(cardId) => {
     console.log(cardId)
@@ -29,7 +27,7 @@ return (
         <img className= "" src = {cardImgUrl} />
         <p>{cardDescription}</p>
         <div>
-          <button className="upVoteButton" onClick={() => {increaseUpvote(card.id)}}>Upvote: {card.upVote} </button>
+          <button className="upVoteButton" onClick={() => {increaseUpvote(card.id)}}>Upvote⬆: {card.upVote} </button>
           <button className="cardDeleteButton" onClick={() => {handleCardDelete(card.id)}}>Delete</button>
         </div>
 

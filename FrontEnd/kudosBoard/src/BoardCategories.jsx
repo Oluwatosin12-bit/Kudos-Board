@@ -5,7 +5,7 @@ function BoardCategories({handleCategoryClick}) {
     {id: 'All', label: ''},
     {id: 'Recent', label: 'Recent'},
     {id: 'Celebration', label: 'Celebration'},
-    {id: 'ThankYou', label: 'Thank You'},
+    {id: 'Thank You', label: 'Thank You'},
     {id: 'Inspiration', label: 'Inspiration'},
   ]
 

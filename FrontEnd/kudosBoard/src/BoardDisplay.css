@@ -35,3 +35,7 @@
 .boardView{
     margin-right: 0.7rem;
 }
+.boardView:hover{
+    background-color: #5783db;
+    color: white;
+}

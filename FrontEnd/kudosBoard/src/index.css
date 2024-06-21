@@ -16,7 +16,6 @@ header {
   text-align: center;
   font-family:cursive;
   color: rgb(89, 168, 168);
-  /* text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 90px #ff00de, 0 0 110px #ff00de, 0 0 130px ; */
   text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px aqua, 0 0 40px aqua, 0 0 110px aqua;
 }
 
@@ -46,16 +45,3 @@ footer{
   height: 5rem;
   text-align: center;
 }
-
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */

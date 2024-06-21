@@ -1,17 +1,20 @@
 import './CardsDisplay.css';
 import {useState} from 'React';
+import CommentsForm from './CommentsForm';
+import CommentsView from './CommentsView';
 
-function CardsDisplay({cardTitle, cardImgUrl, cardDescription, handleCardDelete, card}) {
-  let counter = card.upVote
+function CardsDisplay({cardTitle,
+  cardImgUrl, cardDescription, handleCardDelete, card, handleOpenCommentForm,
+  handleOpenCommentSection,isCommentForm, closeCommentForm, isCommentSection, closeCommentSection, cards}) {
+
   const increaseUpvote = async(cardId) => {
+    console.log(cardId)
       try{
         const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/cards/${cardId}/upVote`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json'},
-          // body: JSON.stringify(cardData),
         });
         const data = await response.json();
-        // setCounter(data)
         if (response.ok !== true) {
           console.log('Something went wrong.');
         }
@@ -27,13 +30,19 @@ return (
         <img className= "" src = {cardImgUrl} />
         <p>{cardDescription}</p>
         <div>
-          <button className="upVoteButton" onClick={() => increaseUpvote(card.id)}>Upvote: {counter} </button>
+          <button className="upVoteButton" onClick={() => {increaseUpvote(card.id)}}>Upvote: {card.upVote} </button>
           <button className="cardDeleteButton" onClick={() => {handleCardDelete(card.id)}}>Delete</button>
         </div>
+
+        <div>
+          <button className="addCommentButton" onClick={() => handleOpenCommentForm(card.id)}>Add comment</button>
+          <button className="commentViewButton" onClick={() => handleOpenCommentSection(card.id)}>💬</button>
+        </div>
+
+
       </div>
   </>
 );
 }
-// onClick={increaseUpvote}
 
 export default CardsDisplay;

@@ -3,17 +3,38 @@ import { useState, useEffect } from 'React';
 import CardsDisplay from './CardsDisplay';
 import CardForm from './CardForm';
 import './CardsPage.css'
+import CommentsForm from './CommentsForm';
+import CommentsView from './CommentsView';
 
 function CardsPage() {
   let navigate = useNavigate();
   const { id } = useParams();
   const [cards, setCards] = useState([]);
   const [isCardForm, setIsCardForm] = useState(false);
+  const [isCommentForm, setIsCommentForm] = useState(false);
+  const [isCommentSection, setIsCommentSection] = useState(false);
+  const [currentCardId, setCurrentCardId] = useState(-1);
   const handleCardForm = () => {
     setIsCardForm(!isCardForm);
   }
   const closeCardForm = () => {
     setIsCardForm(false);
+  };
+
+  const handleOpenCommentForm= (cardId) => {
+    setIsCommentForm(!isCommentForm);
+    setCurrentCardId(cardId)
+  }
+  const closeCommentForm = () => {
+    setIsCommentForm(false);
+  };
+
+  const handleOpenCommentSection= (cardId) => {
+    setIsCommentSection(!isCommentSection);
+    setCurrentCardId(cardId)
+  }
+  const closeCommentSection = () => {
+    setIsCommentSection(false);
   };
 
   const fetchCards = async() => {
@@ -44,7 +65,7 @@ function CardsPage() {
     }
   };
 
-  const card = cards.map(card => {
+  const cardElements = cards.map(card => {
       return(
         <>
           <CardsDisplay
@@ -52,7 +73,15 @@ function CardsPage() {
           cardImgUrl = {card.cardImgUrl}
           cardDescription = {card.cardDescription}
           card={card}
-          handleCardDelete={handleCardDelete}/>
+          cards={cards}
+          handleCardDelete={handleCardDelete}
+          handleOpenCommentForm={handleOpenCommentForm}
+          handleOpenCommentSection={handleOpenCommentSection}
+          isCommentForm={isCommentForm}
+          closeCommentForm={closeCommentForm}
+          isCommentSection={isCommentSection}
+          closeCommentSection={closeCommentSection}
+          />
         </>
       )
   })
@@ -65,11 +94,19 @@ function CardsPage() {
             <button onClick={handleCardForm}>Create Card</button>
           </div>
           <div className="cardsDisplay">
-            {card}
+            {cardElements}
           </div>
 
           {isCardForm == true && (
             <CardForm setIsCardFormOpen={closeCardForm} id={id} fetchCards={fetchCards}/>
+          )}
+
+          {isCommentForm == true && (
+            <CommentsForm setIsCommentFormOpen = {closeCommentForm} id={currentCardId}/>
+          )}
+
+          {isCommentSection == true && (
+              <CommentsView setIsCommentSectionOpen = {closeCommentSection} id={currentCardId}/>
           )}
       </div>
 

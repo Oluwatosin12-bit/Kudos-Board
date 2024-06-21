@@ -17,3 +17,9 @@
     color: white;
     border-color: white;
 }
+.addCommentButton{
+    margin-top: 5px;
+}
+.commentViewButton{
+    margin-left: 4px;
+}

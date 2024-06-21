@@ -45,7 +45,6 @@ function CardForm({fetchCards, setIsCardFormOpen, id}) {
       }
       setIsCardFormOpen(false)
     }
-    console.log("submitted")
   }
 
   const handleSearchGIF = async(event, searchQuery) => {

@@ -32,6 +32,23 @@ app.post('/boards/:id/cards', async (req, res) => {
     }
 })
 
+app.post('/cards/:id/comments', async (req, res) => {
+    const {id} = req.params;
+    const {name, comment} = req.body;
+    try{
+        const createdComments = await prisma.comments.create({
+            data: {
+                name, comment,
+                // cards: {connect: {id: parseInt(id)}},
+                cardId: parseInt(id),
+            },
+        });
+        res.status(200).json(createdComments);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+})
+
 app.get('/boards', async(req, res) => {
     const {category, search} = req.query;
     try{
@@ -68,8 +85,23 @@ app.get('/boards/:id/cards', async (req, res) =>{
     try{
         const cards = await prisma.cards.findMany({
             where: {boardId: parseInt(id)},
+            orderBy: {
+            id: 'desc',
+              },
         });
         res.status(200).json(cards);
+    } catch(error) {
+        console.error("Error:", error);
+    }
+})
+
+app.get('/cards/:id/comments', async (req, res) =>{
+    const {id} = req.params;
+    try{
+        const comments = await prisma.comments.findMany({
+            where: {cardId: parseInt(id)},
+        });
+        res.status(200).json(comments);
     } catch(error) {
         console.error("Error:", error);
     }

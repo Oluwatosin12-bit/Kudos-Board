@@ -2,16 +2,24 @@ import "./CardForm.css";
 import { useState } from "react";
 
 function CardForm({fetchCards, setIsCardFormOpen, id}) {
+  const [gifList, setGifList] = useState([]);
+  const [selectedGIF, setSelectedGIF] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [cardData, setCardData] = useState({
     cardTitle: '',
     cardDescription: '',
-    cardImgUrl: ``,
+    cardImgUrl: '',
     cardAuthor: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'cardImgUrl'){
+      setSelectedGIF(e.target.value)
+      setCardData({...cardData, [name]: selectedGIF})
+    } else{
     setCardData({...cardData, [name]: value,})
+    }
   }
 
   const handleSubmit = async (event, cardData) =>{
@@ -25,7 +33,7 @@ function CardForm({fetchCards, setIsCardFormOpen, id}) {
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(cardData),
         });
-        const data = await response.json();s
+        const data = await response.json();
         console.log(data)
         if (response.ok !== true) {
           console.log('Something went wrong.');
@@ -37,6 +45,28 @@ function CardForm({fetchCards, setIsCardFormOpen, id}) {
       }
       setIsCardFormOpen(false)
     }
+  }
+
+  const handleSearchGIF = async(event, searchQuery) => {
+    event.preventDefault();
+    if (searchQuery === '') return
+    try{
+      // ${import.meta.env.GIPHY_API_KEY}
+      const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=Tu8ANMCGfZlqS5BFhrK5HnxjtqLj0spB&q=${searchQuery}&limit=5`);
+      const data = await response.json();
+      setGifList(data.data)
+    } catch(error) {
+      console.error('Error:', error)
+    }
+  }
+
+  const handleSearchQueryChange = (event) =>{
+    setSearchQuery(event.target.value)
+  }
+
+  const handleSelectedGIF = (gifUrl) => {
+    setSelectedGIF(gifUrl)
+    setGifList([])
   }
 
   return (
@@ -56,10 +86,23 @@ function CardForm({fetchCards, setIsCardFormOpen, id}) {
             </div>
             <div className="cardImageSection">
               <label className="cardImageLabel">Card Image: <span className="compulsoryField">*</span></label>
-              <input name ="cardImgUrl" className = "" type="text" value = {cardData.cardImgUrl} onChange={handleChange} placeholder="Search GIF..." required/>
+              <input className = "" type="text" value = {searchQuery} onChange={() =>handleSearchQueryChange(event)} placeholder="Search GIF..." required/>
             </div>
             <div className="cardImageSearch">
-              <button>Search</button>
+              <button onClick={() => handleSearchGIF(event, searchQuery)}>Search</button>
+            </div>
+            <div className="">
+              {gifList.map((gif) =>(
+                <img
+                key={gif.id}
+                src={gif.images.fixed_height_small.url}
+                alt={gif.title}
+                onClick={() => {handleSelectedGIF(gif.images.fixed_height_small.url)}}
+                />
+              ))}
+            </div>
+            <div className="">
+              <input name="cardImgUrl" type="text" value = {cardData.cardImgUrl = selectedGIF} onChange={handleChange}/>
             </div>
             <div className="cardAuthorSection">
               <label className="cardAuthorLabel">Author:</label>

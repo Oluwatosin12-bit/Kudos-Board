@@ -99,6 +99,19 @@ app.delete('/cards/:id', async(req, res) => {
     }
 })
 
+app.put('/cards/:id/upVote', async(req, res) => {
+    const {id} = req.params;
+    try{
+        const upVote = await prisma.cards.update({
+            where: {id: parseInt(id)},
+            data: {upVote : {increment: 1}}
+        });
+        res.status(200).json(upVote);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+})
+
 
 const server = app.listen(PORT, () =>{
     console.log(`Server is running at port ${PORT}`)

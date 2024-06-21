@@ -1,9 +1,8 @@
 import { useParams, useNavigate} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'React';
 import CardsDisplay from './CardsDisplay';
 import CardForm from './CardForm';
 import './CardsPage.css'
-
 
 function CardsPage() {
   let navigate = useNavigate();

@@ -29,6 +29,7 @@ model Cards {
   cardDescription String
   cardImgUrl      String
   cardAuthor      String
+  upVote          Int @default(0)
   boardId         Int
   board           Board   @relation(fields: [boardId], references: [id], onDelete: Cascade)
 }

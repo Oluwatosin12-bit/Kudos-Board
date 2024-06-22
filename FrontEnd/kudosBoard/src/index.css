@@ -45,3 +45,13 @@ footer{
   height: 5rem;
   text-align: center;
 }
+
+.socialMediaIcons{
+  margin: 1rem;
+  color: white;
+}
+
+.fa-facebook, .fa-twitter, .fa-instagram{
+  color: white;
+  padding: 5px;
+}
